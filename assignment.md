@@ -31,14 +31,13 @@ passwd <user-name>
 sudo usermod -aG sudo james
 ```
 
-4. For security purposes, it it best practice to disable root login to the remote server. To do that:
-   While logged-in as Root:
+4. For security purposes, it it best practice to disable root login to the remote server. To do that (While logged-in as Root):
 ```bash
 
-# copy .ssh from root to /home/<username>
+# copy .ssh from root home directory to /home/<username>
 cp -r .ssh /home/james
 
-# after .ssh has been copied to the users home directory, change the ownership so that the user now owns it (both the user and the user group) 
+# after .ssh has been copied to the users home directory, change the ownership so that the user now owns it and all files contained within (both the user and the user group) 
 sudo chown james:james -R .ssh
 
 # Next, cd into the root /etc/ssh
@@ -51,10 +50,12 @@ sudo vim sshd_config
 PermitRootLogin no
 ```
 
-6. Logout, then log in to your new user using the <username> and IP address of your server
+6. Logout, then log in to your new user using the username and IP address of your server
+```bash
+    <username>@<ip-address>
+```
 
-
-5. Now that we're logged-in as the <username>, lets install nginx
+5. Now that we're logged-in as the ```<username>```, lets install nginx
 ```bash
 sudo apt install nginx
 ```
@@ -107,7 +108,7 @@ server {
 ```
 
 9. Configure .conf
-In the code above, change root /var/www/html to..
+In the code above, change root /var/www/html to /var/www/hello-world
 ```bash
 server {
 	listen 80 default_server;
